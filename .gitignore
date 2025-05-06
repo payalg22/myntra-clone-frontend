@@ -26,4 +26,4 @@ dist-ssr
 # env file
 .env
 data
-firebaseConfig.js
+firebaseConfig.jssrc/firebase/firebaseConfig.js

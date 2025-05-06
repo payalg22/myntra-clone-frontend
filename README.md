@@ -14,7 +14,7 @@ This is the frontend for the Myntra Clone, built using ReactJS.
 
 ```bash
 git clone https://github.com/payalg22/myntra-clone-frontend.git
-cd myntra-frontend
+cd myntra-clone-frontend
 npm install
 npm run dev
 ```

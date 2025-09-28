@@ -1,11 +1,12 @@
 import React from "react";
 import PhoneLogin from "../../components/User/PhoneLogin";
+import { primaryBtn } from "../../styles/tailwindStyles";
 
 export default function Login() {
   return (
     <div>
       <PhoneLogin />
-      <button className="px-4 py-2 bg-red-500 text-white">
+      <button className={primaryBtn}>
         Login
       </button>
     </div>

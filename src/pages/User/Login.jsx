@@ -6,9 +6,9 @@ export default function Login() {
   return (
     <div>
       <PhoneLogin />
-      <button className={primaryBtn}>
+      {/* <button className={primaryBtn}>
         Login
-      </button>
+      </button> */}
     </div>
   );
 }

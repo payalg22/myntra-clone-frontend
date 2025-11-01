@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { auth } from "../../firebase/firebaseConfig";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { primaryBtn } from "../../styles/tailwindStyles";
-import { useEffect } from "react";
+import { otpLogin } from "../../services/userAuth";
+import { useNavigate } from "react-router-dom";
 
 const PhoneLogin = () => {
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
   const [confirmationResult, setConfirmationResult] = useState(null);
   const [step, setStep] = useState(1);
+
+  const navigate = useNavigate();
 
   const setupRecaptcha = () => {
     if (!window.recaptchaVerifier) {
@@ -60,16 +63,24 @@ const PhoneLogin = () => {
       const result = await confirmationResult.confirm(otp);
       const user = result.user;
 
-      console.log("User:", user);
+      //console.log("User:", user);
       const idToken = await user.getIdToken();
       console.log("Firebase ID Token:", idToken);
       const res = await otpLogin(idToken);
+      const { token, needsProfile } = res.data;
+      localStorage.setItem("token", token);
       console.log(res);
-      // TODO: Send token to backend for verification like Google login
       alert("Login successful!");
+      if(needsProfile) {
+        navigate("/profile");
+      } else {
+          navigate("/");
+      }
     } catch (error) {
       console.error("OTP verification failed:", error);
       alert("Incorrect OTP");
+      setStep(1);
+      setOtp("");
     }
   };
 
